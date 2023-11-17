@@ -1,5 +1,8 @@
 import { IProduct } from "./models/IProduct";
 import { getProducts } from "./services/productService";
+import { productSort } from "./functions";
+
+let desc: boolean = false; 
 
 let products: IProduct[] = [];
 
@@ -13,6 +16,7 @@ export const init = () => {
 
   const sortButton = document.getElementById("sort") as HTMLButtonElement;
   sortButton.classList.toggle("invisible");
+
 };
 
 const handleSearch = async () => {
@@ -39,6 +43,11 @@ const handleSearch = async () => {
   } catch {
     displayNoResult(container);
   }
+  const sortButton = document.getElementById("sort") as HTMLButtonElement;
+  sortButton.addEventListener("click", () => {
+    productSort(products, desc = !desc);
+    createHtml(products, container);
+  })
 };
 
 export const createHtml = (products: IProduct[], container: HTMLDivElement) => {

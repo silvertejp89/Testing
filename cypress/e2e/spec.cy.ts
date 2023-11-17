@@ -45,4 +45,21 @@ it('should present a movie', () => {
 //   cy.get('#searchresult > div > .movie__image > img').should("exist");
 // })
 
+it('should show no results when no movies', () => {
+    cy.intercept("https://medieinstitutet-wie-products.azurewebsites.net/api/*", []
+);
+  cy.get("form input#searchText").type("star");
+  cy.get("form button").contains("Sök").click();
+  cy.get("#searchresult > p").contains("Inga sökresultat");
+});
+
+it('should sort movies when button is pressed', () => {
+  cy.get("form input#searchText").type("star");
+  cy.get("form button").contains("Sök").click();
+  cy.get("button").contains("Sortera").click();
+  cy.get("#searchresult > div > h3").first();
+
+
 })
+
+});

@@ -51,6 +51,7 @@ const handleSearch = async () => {
 };
 
 export const createHtml = (products: IProduct[], container: HTMLDivElement) => {
+  container.innerHTML = "";
   for (let i = 0; i < products.length; i++) {
     let movie = document.createElement("div");
     let title = document.createElement("h3");

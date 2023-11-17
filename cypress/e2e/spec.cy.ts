@@ -54,12 +54,20 @@ it('should show no results when no movies', () => {
 });
 
 it('should sort movies when button is pressed', () => {
+  cy.intercept("https://medieinstitutet-wie-products.azurewebsites.net/api/*",[
+          {
+        name: "Vad som helst - the movie",
+        imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/0c/cd/c6/0ccdc621-bd7d-16e4-ffdf-d3808436f6a6/mza_10610807914077573874.jpg/1200x1200bb.jpg"
+      },
+      {
+        name: "Agaton - an epic saga",
+        imageUrl: "https://www.filminstitutet.se/globalassets/2.-fa-kunskap-om-film/ta-del-av-filmsamlingarna/affischbilder/agaton-sax-och-bykopings-gastabud_affisch.jpg"
+      }
+    ]);
   cy.get("form input#searchText").type("star");
   cy.get("form button").contains("Sök").click();
   cy.get("button").contains("Sortera").click();
-  cy.get("#searchresult > div > h3").first();
-
-
+  cy.get("#searchresult > div > h3").first().contains("Agaton");
 })
 
 });

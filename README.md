@@ -1,19 +1,32 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Q49SEMcL)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12896991&assignment_repo_type=AssignmentRepo)
-# Inlämningsuppgift Testning
+# Testing – Cypress end-to-end tests for a movie search app
 
-Er uppgift är att testa detta projekt. Ni behöver skapa tester för de funktioner som finns i movieSearchApp.ts. Fundera över vad ni behöver göra för att testa funktionerna. Hur kan ni testa funktionerna när parametrarna är bra respektive dåliga?
+A school assignment in testing. We were given a small movie search app in TypeScript and Vite, and my task was to write tests for it and implement a sort function.
 
-Skriv så många tester som ni anser er behöva. Beroende av hur du skriver dina tester så kan det behövas fler eller färra än dina klasskompisar.
+## What I did
 
-## Betygskriterier G
+- **End-to-end tests with Cypress** (`cypress/e2e/spec.cy.ts`) covering:
+  - The search form renders with its input, search button and sort button
+  - A search shows results
+  - A movie is presented with the right title and image
+  - An empty result shows the "Inga sökresultat" message
+  - The sort button orders the results alphabetically
+- **Mock data:** most tests use `cy.intercept` to replace the API response with fixed data, so they don't depend on what the live API returns.
+- **Sort function:** implemented `productSort` in `src/ts/functions.ts` (ascending or descending by name).
 
-- Samtliga tester är godkända
-- Du har testar majoriteten av funktionerna på ett bra sätt
+## Run locally
 
-## Betygskriterier VG
+```bash
+npm install
+npm run dev        # starts the app on http://localhost:5173
+npx cypress open   # in a second terminal
+```
 
-- Samtliga krav från G
-- Du använder mock-data för att genomföra tester
-- Implementera sorteringsfunktionen i filen functions.ts
-- Testa sorteringsfunktionen
+## What I would improve today
+
+- The "should show movies" test still calls the real API and expects exactly two results, so it breaks if the API changes. It should use mock data like the others.
+- Add unit tests for `productSort`, including the descending order and equal names.
+- Run the tests automatically on every push with GitHub Actions.
+
+_The original assignment description is kept below._
+
+---

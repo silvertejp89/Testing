@@ -26,7 +26,3 @@ npx cypress open   # in a second terminal
 - The "should show movies" test still calls the real API and expects exactly two results, so it breaks if the API changes. It should use mock data like the others.
 - Add unit tests for `productSort`, including the descending order and equal names.
 - Run the tests automatically on every push with GitHub Actions.
-
-_The original assignment description is kept below._
-
----
